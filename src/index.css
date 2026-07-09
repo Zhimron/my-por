@@ -1,16 +1,102 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-a{
- @apply p-5  hover:font-semibold ;
-}
-ul{
-    @apply list-none flex font-bold;
-}
-li{
-    @apply  font-bold cursor-pointer;
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-800 font-sans antialiased transition-colors duration-300;
+  }
+
+  .dark body {
+    @apply bg-night text-slate-200;
+  }
+
+  ::selection {
+    @apply bg-indigo-500/30 text-inherit;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-indigo-500 ring-offset-2 ring-offset-slate-50;
+  }
+
+  .dark :focus-visible {
+    @apply ring-offset-night;
+  }
+
+  /* Themed thin scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 dark:bg-night-600 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400 dark:bg-indigo-900;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
+@layer components {
+  /* Frosted glass surfaces */
+  .glass {
+    @apply bg-white/60 dark:bg-white/[0.04] backdrop-blur-xl border border-slate-200/80 dark:border-white/10;
+  }
 
+  .glass-card {
+    @apply glass rounded-2xl transition-all duration-300;
+  }
+
+  .glass-card-hover {
+    @apply hover:-translate-y-1 hover:shadow-glow hover:border-indigo-300/60 dark:hover:border-indigo-500/40;
+  }
+
+  /* Animated gradient headline text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-400 bg-clip-text text-transparent;
+    background-size: 200% 200%;
+    @apply animate-gradient-x;
+  }
+
+  .section-container {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all duration-300 hover:shadow-glow hover:brightness-110 active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-slate-700 dark:text-slate-200 glass transition-all duration-300 hover:border-indigo-400/60 hover:text-indigo-600 dark:hover:text-indigo-300 active:scale-95;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100 dark:bg-indigo-500/10 dark:text-indigo-300 dark:border-indigo-500/20;
+  }
+
+  /* Subtle blueprint grid for the animated background */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(100 116 139 / 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(100 116 139 / 0.08) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+  }
+}
