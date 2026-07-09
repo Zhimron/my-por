@@ -7,6 +7,10 @@ import AIProjects from '../components/sections/AIProjects';
 import Experience from '../components/sections/Experience';
 import Certifications from '../components/sections/Certifications';
 import Services from '../components/sections/Services';
+import GitHubActivity from '../components/sections/GitHubActivity';
+import Testimonials from '../components/sections/Testimonials';
+import FAQ from '../components/sections/FAQ';
+import Contact from '../components/sections/Contact';
 
 const Home = () => {
   return (
@@ -20,6 +24,10 @@ const Home = () => {
       <Experience />
       <Certifications />
       <Services />
+      <GitHubActivity />
+      <Testimonials />
+      <FAQ />
+      <Contact />
     </>
   );
 };

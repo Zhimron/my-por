@@ -22,6 +22,11 @@ export interface Personal {
   /** Path (from /public) to the downloadable resume. */
   resumeUrl: string;
   availableForWork: boolean;
+  /**
+   * Optional form endpoint (e.g. Formspree/FormSubmit URL). When unset,
+   * the contact form falls back to opening the visitor's email client.
+   */
+  contactFormEndpoint?: string;
 }
 
 export interface SocialLink {
