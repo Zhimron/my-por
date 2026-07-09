@@ -1,13 +1,11 @@
-import Baddy from '../Baddy';
-import More from '../Moreme';
+import Hero from '../components/sections/Hero';
+import About from '../components/sections/About';
 
 const Home = () => {
   return (
     <>
-      <Baddy />
-      <section id="about" className="scroll-mt-24">
-        <More />
-      </section>
+      <Hero />
+      <About />
     </>
   );
 };
