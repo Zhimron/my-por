@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { portfolio, skillCategories } from '../../data/portfolio';
 import type { SkillCategory } from '../../data/types';
-import { fadeUp, staggerContainer, viewportOnce } from '../../lib/motion';
+import { fadeUp, staggerContainer } from '../../lib/motion';
 import SectionHeading from '../ui/SectionHeading';
 
 const categoryIcons: Record<SkillCategory, LucideIcon> = {
@@ -62,33 +62,13 @@ const Skills = () => {
                 </h3>
               </div>
 
-              <ul className="space-y-4">
+              <ul className="flex flex-wrap gap-2">
                 {skills.map((skill) => (
-                  <li key={skill.name}>
-                    <div className="mb-1.5 flex items-center justify-between text-sm">
-                      <span className="font-medium text-slate-700 dark:text-slate-200">
-                        {skill.name}
-                      </span>
-                      <span className="text-xs text-slate-400 dark:text-slate-500">
-                        {skill.level}%
-                      </span>
-                    </div>
-                    <div
-                      role="progressbar"
-                      aria-valuenow={skill.level}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      aria-label={`${skill.name} proficiency`}
-                      className="h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-white/10"
-                    >
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={viewportOnce}
-                        transition={{ duration: 1, ease: 'easeOut' }}
-                        className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-violet-500"
-                      />
-                    </div>
+                  <li
+                    key={skill.name}
+                    className="rounded-full border border-slate-200 bg-white/60 px-3 py-1.5 text-sm font-medium text-slate-700 transition-colors hover:border-indigo-300 hover:text-indigo-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-indigo-500/40 dark:hover:text-indigo-300"
+                  >
+                    {skill.name}
                   </li>
                 ))}
               </ul>

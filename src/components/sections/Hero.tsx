@@ -144,7 +144,7 @@ const Hero = () => {
               className="glass-card absolute -left-6 top-8 flex items-center gap-2 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200"
             >
               <Sparkles size={14} className="text-violet-500" aria-hidden="true" />
-              AI Engineer
+              {personal.roles[0]}
             </motion.div>
             <motion.div
               animate={{ y: [6, -6] }}
@@ -152,7 +152,7 @@ const Hero = () => {
               className="glass-card absolute -right-8 bottom-10 flex items-center gap-2 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200"
             >
               <span aria-hidden="true">{'</>'}</span>
-              Full-Stack Dev
+              {personal.roles[1] ?? personal.roles[0]}
             </motion.div>
           </div>
         </motion.div>

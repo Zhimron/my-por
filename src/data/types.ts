@@ -49,8 +49,6 @@ export type SkillCategory =
 export interface Skill {
   name: string;
   category: SkillCategory;
-  /** Proficiency 0–100, drives the skill bar width. */
-  level: number;
   /** Featured skills also appear in the Tech Stack marquee. */
   featured?: boolean;
 }

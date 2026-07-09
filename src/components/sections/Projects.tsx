@@ -9,7 +9,12 @@ import ProjectCard from '../ui/ProjectCard';
 
 type CategoryFilter = ProjectCategory | 'all';
 
-const categories: CategoryFilter[] = ['all', 'ai', 'web', 'fullstack', 'software'];
+/** Only offer category filters that actually have projects. */
+const allCategories: ProjectCategory[] = ['ai', 'web', 'fullstack', 'software'];
+const categories: CategoryFilter[] = [
+  'all',
+  ...allCategories.filter((c) => portfolio.projects.some((p) => p.category === c)),
+];
 
 const Projects = () => {
   const [query, setQuery] = useState('');
