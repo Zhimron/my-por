@@ -9,6 +9,8 @@ import BackToTop from './components/layout/BackToTop';
 import Loader from './components/layout/Loader';
 import ScrollToHash from './components/layout/ScrollToHash';
 import Home from './pages/Home';
+import ProjectDetail from './pages/ProjectDetail';
+import NotFound from './pages/NotFound';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -34,6 +36,8 @@ function App() {
       <main id="main" className="pt-16">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/projects/:slug" element={<ProjectDetail />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
