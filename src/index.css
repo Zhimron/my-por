@@ -9,6 +9,23 @@
 
   body {
     @apply bg-slate-50 text-slate-800 font-sans antialiased transition-colors duration-300;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.02em;
+  }
+
+  html.home-route,
+  body.home-route {
+    height: 100%;
+    overflow: hidden;
   }
 
   .dark body {
@@ -68,11 +85,9 @@
     @apply hover:-translate-y-1 hover:shadow-glow hover:border-indigo-300/60 dark:hover:border-indigo-500/40;
   }
 
-  /* Animated gradient headline text */
+  /* Static gradient accent text */
   .gradient-text {
-    @apply bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-400 bg-clip-text text-transparent;
-    background-size: 200% 200%;
-    @apply animate-gradient-x;
+    @apply bg-gradient-to-br from-indigo-600 via-violet-600 to-cyan-500 bg-clip-text text-transparent dark:from-indigo-300 dark:via-violet-300 dark:to-cyan-300;
   }
 
   .section-container {
@@ -89,6 +104,14 @@
 
   .chip {
     @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100 dark:bg-indigo-500/10 dark:text-indigo-300 dark:border-indigo-500/20;
+  }
+
+  .home-panel {
+    @apply scroll-mt-24 transition-all duration-300;
+  }
+
+  .home-panel-active {
+    @apply ring-2 ring-cyan-300/50 ring-offset-2 ring-offset-white dark:ring-cyan-300/40 dark:ring-offset-night;
   }
 
   /* Subtle blueprint grid for the animated background */

@@ -8,7 +8,7 @@ const Testimonials = () => {
   if (portfolio.testimonials.length === 0) return null;
 
   return (
-    <section id="testimonials" className="section-container scroll-mt-24 py-24">
+    <section id="testimonials" className="section-container scroll-mt-24 pt-6 pb-16">
       <SectionHeading
         eyebrow="Kind words"
         title="Testimonials"

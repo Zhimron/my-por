@@ -54,7 +54,14 @@ export interface Skill {
 }
 
 export type ProjectStatus = 'completed' | 'in-progress' | 'planned';
-export type ProjectCategory = 'ai' | 'web' | 'fullstack' | 'software';
+export type ProjectCategory =
+  | "ai"
+  | "web"
+  | "fullstack"
+  | "software"
+  | "desktop"
+  | "security"
+  | "frontend";
 
 export interface Project {
   /** URL slug — the detail page lives at /projects/<slug>. */

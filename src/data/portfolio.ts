@@ -9,10 +9,16 @@
  */
 import type { Portfolio } from './types';
 
-import avatar from '../assets/shimron.JPG';
+import avatar from "../assets/viber_image_2024-09-02_14-01-28-869.jpg";
 import imgPortfolio from '../assets/projects/portfolio-site.svg';
-import imgTaskflow from '../assets/projects/taskflow.svg';
-import imgStockSense from '../assets/projects/stocksense.svg';
+import imgTaskflow from "../assets/projects/image.png";
+import imgPythonFileLocker from "../assets/projects/image2.png";
+import imgLaundryM from "../assets/projects/image3.png";
+import imgTravelLog from "../assets/projects/image4.png";
+import imgEnrollment from "../assets/projects/enrollment-admission.svg";
+import imgCooperative from "../assets/projects/cooperative-system.svg";
+import imgAccounting from "../assets/projects/accounting-system.svg";
+
 
 export const portfolio: Portfolio = {
   personal: {
@@ -29,6 +35,8 @@ export const portfolio: Portfolio = {
       "I design and ship software across the whole stack — from VB.NET desktop systems where I started, to modern full-stack web applications. The fire to learn never went out.",
     about: [
       "I'm Shimron M. Guray. I started as a systems developer working in Visual Basic, building desktop software before deciding to deep-dive into web development.",
+      "Here's the honest version: I'm lazy. Not the kind that avoids work — the kind that can't stand doing the same tedious step twice. If something felt slow or repetitive, I'd rather spend the extra hour figuring out how to automate it than grind through it by hand every single time. That impatience turned out to be useful — it's the same instinct that pulled me toward programming in the first place: let the machine handle the boring parts so I can move faster.",
+      "That instinct got tested in my capstone year. Our group needed a leader, and — half by circumstance, half because I'd already automated my share of the workload — it landed on me. I hadn't planned on leading anything. But once the responsibility was there, the laziness flipped into drive: the fastest way to a good outcome wasn't cutting corners, it was building something that actually worked the first time. I self-taught VB.NET deep enough to lead the build of a full laundry management system with IoT integration, pushed the team past the easy version of the project, and we came out with one of the strongest capstone systems in our batch. Stepping up, it turns out, wasn't about being the loudest person in the room — it was about being the one who couldn't stand watching something get built badly.",
       "The fire in me that awakened back then is still flaming hot. Web development showed me a completely different way of building systems: hard, but genuinely enjoyable. There is always more to learn, and I take my time and enjoy the process.",
       "Today I work across the stack — React and TypeScript on the front, Node.js on the back — turning ideas into fast, reliable products.",
     ],
@@ -66,6 +74,7 @@ export const portfolio: Portfolio = {
     { name: "TypeScript", category: "Languages", featured: true },
     { name: "JavaScript", category: "Languages", featured: true },
     { name: "Python", category: "Languages", featured: true },
+    { name: "PHP", category: "Languages", featured: true },
     { name: "VB.NET", category: "Languages" },
     { name: "C#", category: "Languages" },
     { name: "SQL", category: "Languages" },
@@ -77,6 +86,7 @@ export const portfolio: Portfolio = {
     { name: "Vite", category: "Frontend" },
     // Backend
     { name: "Node.js", category: "Backend", featured: true },
+    { name: "Laravel", category: "Backend" },
     { name: "REST APIs", category: "Backend" },
     // Databases
     { name: "MongoDB", category: "Databases" },
@@ -98,54 +108,87 @@ export const portfolio: Portfolio = {
   projects: [
     // [SAMPLE] — replace with your real projects
     {
-      slug: "taskflow",
-      title: "TaskFlow",
+      slug: "LaundryM",
+      title: "Laundry Management System",
       description:
-        "Full-stack kanban and team task manager with real-time collaboration and role-based access.",
+        "Desktop laundry management system with customer management, inventory tracking, transaction processing, and business reporting.",
       longDescription:
-        "TaskFlow is a collaborative project board built to master full-stack fundamentals: optimistic UI updates, WebSocket sync between clients, role-based permissions, and a clean REST API. Boards, columns and cards are drag-and-drop with conflict-free ordering.",
-      image: imgTaskflow,
+        "LaundryM is a full-featured Windows desktop application developed to streamline daily laundry business operations. Built using VB.NET and SQL Server, the system provides customer management, service configuration, inventory monitoring, transaction processing, receipt generation, audit logging, and secure user authentication. The application follows a modular architecture with an intuitive interface, enabling businesses to efficiently manage orders, monitor inventory, and maintain accurate operational records.",
+      image: imgLaundryM,
       tech: [
-        "React",
-        "TypeScript",
-        "Node.js",
-        "Express",
-        "MongoDB",
-        "Socket.IO",
+        "VB.NET",
+        ".NET Framework",
+        "SQL Server",
+        "ADO.NET",
+        "Guna.UI2",
+        "Windows Forms",
+        "FontAwesome",
       ],
-      github: "https://github.com/Zhimron",
+      github: "https://github.com/Zhimron/Laundry",
       features: [
-        "Real-time multi-user board sync",
-        "Drag-and-drop cards with fractional ordering",
-        "Role-based access control (owner / editor / viewer)",
-        "Activity feed and notifications",
+        "Customer profile and account management",
+        "Laundry service and pricing management",
+        "Transaction processing and payment recording",
+        "Inventory monitoring and stock management",
+        "Receipt generation and printing",
+        "Order tracking with ongoing laundry status",
+        "Audit logging and activity history",
+        "Secure user authentication and account settings",
+        "Role-ready modular desktop architecture",
+        "Professional Windows desktop interface",
       ],
       status: "completed",
-      category: "fullstack",
-      tags: ["Kanban", "Realtime", "Teams"],
+      category: "desktop",
+      tags: [
+        "Business Management",
+        "Desktop Application",
+        "Inventory",
+        "POS",
+        "SQL Server",
+      ],
       featured: true,
-      year: 2024,
+      year: 2026,
     },
     {
-      slug: "stocksense",
-      title: "StockSense",
+      slug: "PythonFileLocker",
+      title: "Python File Locker",
       description:
-        "Inventory management system for a campus bookstore — my VB.NET roots, modernized with a web dashboard.",
+        "Secure file encryption application featuring authenticated encryption, Argon2id key derivation, and password + key-file protection.",
       longDescription:
-        "StockSense began as the VB.NET desktop inventory system I built as a student — the project that made me fall in love with building software. It has since grown a web dashboard for reporting, low-stock alerts and supplier tracking, bridging my desktop-systems background with modern web development.",
-      image: imgStockSense,
-      tech: ["VB.NET", "MySQL", "React", "Node.js"],
-      github: "https://github.com/Zhimron",
+        "Python File Locker is a desktop security application designed to protect sensitive files, folders, images, and videos using modern cryptographic standards. The application encrypts data with authenticated encryption, securely derives encryption keys using Argon2id, and supports optional key-file authentication for enhanced security. It also includes encrypted metadata, compression, secure temporary file handling, and backward compatibility with legacy encrypted files, making it a practical solution for protecting confidential data.",
+      image: imgPythonFileLocker,
+      tech: [
+        "Python",
+        "PySide6",
+        "Argon2id",
+        "AES-256-GCM",
+        "ChaCha20-Poly1305",
+        "Cryptography",
+        "PyInstaller",
+      ],
+      github: "https://github.com/Zhimron/FILE-LOCKER",
       features: [
-        "Barcode-based stock in/out workflow",
-        "Low-stock alerts and supplier tracking",
-        "Sales and inventory reports with charts",
-        "Web dashboard alongside the original desktop client",
+        "Encrypt files, folders, images, videos, and documents",
+        "AES-256-GCM and ChaCha20-Poly1305 authenticated encryption",
+        "Argon2id memory-hard password key derivation",
+        "Optional password + key-file multi-factor protection",
+        "Encrypted metadata with original filename and timestamps",
+        "Compression before encryption to reduce file size",
+        "Secure temporary file opening without permanent decryption",
+        "Legacy encrypted file migration to the latest security format",
+        "Cross-system standalone Windows executable via PyInstaller",
       ],
       status: "completed",
-      category: "software",
-      tags: ["Inventory", "Desktop", "VB.NET"],
-      year: 2023,
+      category: "security",
+      tags: [
+        "Cybersecurity",
+        "Encryption",
+        "Desktop App",
+        "Python",
+        "Cryptography",
+      ],
+      featured: true,
+      year: 2026,
     },
     {
       slug: "portfolio-website",
@@ -169,6 +212,144 @@ export const portfolio: Portfolio = {
       tags: ["Portfolio", "Design", "Animation"],
       year: 2026,
     },
+    {
+      slug: "TaskManager",
+      title: "TaskManager",
+      description:
+        "Full-stack task management system with team collaboration, role-based access, and a PHP + MySQL backend.",
+      longDescription:
+        "TaskManager is a modern full-stack productivity application built with React, Vite, PHP, and MySQL. It enables individuals and teams to organize projects, assign tasks, monitor progress, and collaborate efficiently through a clean and responsive interface. The system features secure authentication, role-based permissions, team management, dashboard analytics, and RESTful API integration, making it a practical solution for managing daily workflows and team productivity.",
+      image: imgTaskflow,
+      tech: [
+        "React",
+        "Vite",
+        "JavaScript",
+        "PHP",
+        "MySQL",
+        "REST API",
+        "XAMPP",
+      ],
+      github: "https://github.com/Zhimron/TaskManager",
+      features: [
+        "User authentication and secure login system",
+        "Create, edit, assign, and manage tasks",
+        "Team creation and member collaboration",
+        "Role-based access control",
+        "Interactive dashboard with task statistics",
+        "RESTful PHP API with MySQL database",
+        "Responsive and modern React interface",
+        "Health monitoring endpoint for backend status",
+      ],
+      status: "in-progress",
+      category: "fullstack",
+      tags: [
+        "Task Management",
+        "Team Collaboration",
+        "Productivity",
+        "Dashboard",
+      ],
+      featured: true,
+      year: 2026,
+    },
+    {
+      slug: "TravelLog",
+      title: "Travel Log",
+      description:
+        "Modern travel planning and journaling platform with user authentication, trip management, and an interactive dashboard.",
+      longDescription:
+        "Travel Log is a responsive React application designed to help users organize, manage, and document their travel experiences. Built with React, Vite, and Tailwind CSS, the platform provides secure authentication, personalized dashboards, trip planning, travel history management, and archive functionality. The project demonstrates modern frontend development practices through reusable components, Context API state management, responsive design, and engaging user interactions powered by Framer Motion and Lottie animations.",
+      image: imgTravelLog,
+      tech: [
+        "React",
+        "Vite",
+        "JavaScript",
+        "Tailwind CSS",
+        "Material UI",
+        "React Router",
+        "Context API",
+        "Framer Motion",
+        "Lottie",
+        "LocalForage",
+      ],
+      github: "https://github.com/Zhimron/Travel_Frontend",
+      features: [
+        "Secure user registration and authentication",
+        "Create, edit, archive, and delete travel logs",
+        "Personalized travel dashboard",
+        "Trip history and archive management",
+        "Responsive mobile-friendly interface",
+        "Reusable React component architecture",
+        "Persistent local storage with LocalForage",
+        "Smooth page transitions and animations",
+        "Custom 404 page and protected routing",
+        "Modern UI built with Tailwind CSS and Material UI",
+      ],
+      status: "in-progress",
+      category: "frontend",
+      tags: ["Travel", "Dashboard", "React", "UI/UX", "Responsive"],
+      featured: true,
+      year: 2026,
+    },
+    {
+      slug: "EnrollmentAdmissionSystem",
+      title: "Enrollment and Admission System",
+      description:
+        "Full-stack school enrollment and admission platform built during my internship, handling student registration end to end.",
+      longDescription:
+        "Built during my internship at Excellence and Innovation, this system manages server-side logic and API development for student enrollment and admission processes. I was responsible for the backend, including data storage and processing, while working closely with front-end developers to ensure smooth, reliable interactions across the enrollment workflow.",
+      image: imgEnrollment,
+      tech: ["PHP", "MySQL", "React", "Tailwind CSS", "Postman"],
+      features: [
+        "Student enrollment and admission workflow",
+        "Server-side logic and REST API development",
+        "Data storage, retrieval, and processing for student records",
+        "Front-end and back-end integration",
+      ],
+      status: "completed",
+      category: "fullstack",
+      tags: ["Education", "Enrollment", "PHP", "Internship"],
+      year: 2023,
+    },
+    {
+      slug: "CooperativeSystem",
+      title: "Cooperative System",
+      description:
+        "Backend and front-end system mimicking traditional banking features, tailored for cooperatives.",
+      longDescription:
+        "An ongoing full-stack system that brings core banking-style functionality to cooperatives. I create the APIs and manage backend logic and front-end integration, covering member accounts and transaction-style operations, built with PHP, MySQL, React, and Tailwind CSS.",
+      image: imgCooperative,
+      tech: ["PHP", "MySQL", "React", "Tailwind CSS", "Postman"],
+      features: [
+        "Member account management",
+        "Banking-style transaction handling for cooperatives",
+        "REST API design and backend logic",
+        "React + Tailwind front-end integration",
+      ],
+      status: "in-progress",
+      category: "fullstack",
+      tags: ["Fintech", "Cooperative", "PHP", "Banking"],
+      year: 2026,
+    },
+    {
+      slug: "AccountingSystem",
+      title: "Accounting System",
+      description:
+        "Accounting system focused on petty cash disbursement, journal entries, and other financial components.",
+      longDescription:
+        "An ongoing accounting system covering core financial operations — petty cash disbursement, journal entries, and related bookkeeping components. Built with PHP and MySQL on the backend and React with Tailwind CSS on the front end.",
+      image: imgAccounting,
+      tech: ["PHP", "MySQL", "React", "Tailwind CSS", "Postman"],
+      features: [
+        "Petty cash disbursement tracking",
+        "Journal entry management",
+        "Financial reporting components",
+        "REST API backend with React front end",
+      ],
+      status: "in-progress",
+      category: "fullstack",
+      tags: ["Accounting", "Finance", "PHP"],
+      year: 2026,
+    },
   ],
 
   experience: [
@@ -180,8 +361,7 @@ export const portfolio: Portfolio = {
       location: "Philippines",
       start: "July 2023",
       end: null,
-      description:
-        "Building web applications and AI-powered tools.",
+      description: "Building web applications and AI-powered tools.",
       highlights: [
         "Delivered full-stack apps from design to deployment",
         "Modernized legacy VB.NET systems with web dashboards",
@@ -189,23 +369,25 @@ export const portfolio: Portfolio = {
       type: "work",
     },
     {
-      id: "intern-2024",
-      role: "Backend Developer Intern",
-      organization: "Exellence and Innovation",
+      id: "excellence-innovation",
+      role: "Back-End Developer: Intern to Full Time",
+      organization: "Excellence and Innovation",
       location: "Philippines",
-      start: "Apr 2023",
-      end: "Jul 2023",
-      description: "Create a server side for a school system",
+      start: "May 2023",
+      end: null,
+      description:
+        "Ensured seamless integration between server-side applications and front-end development, handling data storage, retrieval, and processing.",
       highlights: [
-        "Maintained VB.NET business applications used daily by staff",
-        "Built internal reporting tools with React and Node.js",
+        "Built server-side logic and APIs for the Enrollment and Admission System",
+        "Collaborated with front-end developers to meet application needs",
+        "Promoted from intern to full-time back-end developer",
       ],
       type: "work",
     },
     {
       id: "bsis",
       role: "BS Information System",
-      organization: "College",
+      organization: "Richwell Colleges Incorporated",
       location: "Philippines",
       start: "2019",
       end: "2023",
@@ -217,23 +399,41 @@ export const portfolio: Portfolio = {
       ],
       type: "education",
     },
+    {
+      id: "atec-ict",
+      role: "ICT – Programming",
+      organization: "Atec Technological College",
+      location: "Philippines",
+      start: "2017",
+      end: "2019",
+      description: "Senior high school specialization in ICT and programming fundamentals.",
+      highlights: [],
+      type: "education",
+    },
   ],
 
   certifications: [
     // [SAMPLE] — replace with your real certifications
     {
-      id: "aws-ccp",
-      title: "AWS Certified Cloud Practitioner",
-      issuer: "Amazon Web Services",
-      date: "2025",
-      url: "https://aws.amazon.com/certification/",
+      id: "tesda",
+      title: "NC III in WEB DEVELOPMENT",
+      issuer: "Technical education and skills development authority",
+      date: "2026",
+      url: "https://t2mis.tesda.gov.ph/Learners/S/4B004B00780035006F004D002B004A00320057006F006700460077004D004B006900380043006600780067003D003D00",
     },
     {
-      id: "fcc-fullstack",
-      title: "Full Stack Developer Certification",
-      issuer: "freeCodeCamp",
-      date: "2024",
-      url: "https://www.freecodecamp.org/",
+      id: "dict",
+      title: "Tech Trends:Data Analytics(Intermediate Session)",
+      issuer: "DICT",
+      date: "2022",
+      url: "https://drive.google.com/drive/u/0/folders/1EbfG_mpmEws4jOgVsFjDCs-6eB3fCkGx",
+    },
+    {
+      id: "dict-blockchain",
+      title: "Tech Trends:Blockchain(Intermediate Session)",
+      issuer: "DICT",
+      date: "2022",
+      url: "https://drive.google.com/drive/u/0/folders/1EbfG_mpmEws4jOgVsFjDCs-6eB3fCkGx",
     },
   ],
 

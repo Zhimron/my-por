@@ -1,20 +1,48 @@
+import { useEffect, useRef } from 'react';
+
 /**
- * Full-viewport decorative background: blueprint grid + drifting gradient
- * blobs. Sits behind all content; purely decorative (aria-hidden).
+ * Full-viewport decorative background: a plain surface with a faint grid
+ * and a soft glow that follows the cursor. Sits behind all content;
+ * purely decorative (aria-hidden). The cursor position is written straight
+ * to a CSS variable via a ref (no React state) so it never triggers a
+ * re-render on mousemove.
  */
 const AnimatedBackground = () => {
+  const glowRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let frame = 0;
+    const handleMove = (event: MouseEvent) => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        glowRef.current?.style.setProperty('--x', `${event.clientX}px`);
+        glowRef.current?.style.setProperty('--y', `${event.clientY}px`);
+      });
+    };
+
+    window.addEventListener('mousemove', handleMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMove);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
   return (
-    <div aria-hidden="true" className="fixed inset-0 -z-10 overflow-hidden">
-      {/* Base wash */}
-      <div className="absolute inset-0 bg-gradient-to-b from-indigo-50/60 via-slate-50 to-slate-50 dark:from-night-700/60 dark:via-night dark:to-night" />
+    <div aria-hidden="true" className="fixed inset-0 -z-10 overflow-hidden bg-slate-50 dark:bg-night">
+      {/* Faint blueprint grid */}
+      <div className="absolute inset-0 bg-grid opacity-40 dark:opacity-30" />
 
-      {/* Blueprint grid, fading toward the bottom */}
-      <div className="absolute inset-0 bg-grid" />
-
-      {/* Drifting gradient blobs */}
-      <div className="absolute -top-32 -left-32 h-[28rem] w-[28rem] rounded-full bg-indigo-400/25 dark:bg-indigo-600/20 blur-3xl animate-blob" />
-      <div className="absolute top-1/3 -right-40 h-[32rem] w-[32rem] rounded-full bg-violet-400/20 dark:bg-violet-600/15 blur-3xl animate-blob-slow" />
-      <div className="absolute bottom-0 left-1/3 h-[24rem] w-[24rem] rounded-full bg-cyan-300/20 dark:bg-cyan-500/10 blur-3xl animate-blob [animation-delay:6s]" />
+      {/* Soft glow that tracks the cursor */}
+      <div
+        ref={glowRef}
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(500px circle at var(--x, 50%) var(--y, 15%), rgba(99, 102, 241, 0.14), transparent 70%)',
+        }}
+      />
     </div>
   );
 };

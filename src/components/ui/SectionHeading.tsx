@@ -22,7 +22,7 @@ const SectionHeading = ({
       initial="hidden"
       whileInView="visible"
       viewport={viewportOnce}
-      className={`mb-12 flex flex-col gap-3 ${alignClass}`}
+      className={`mb-8 flex flex-col gap-3 ${alignClass}`}
     >
       <motion.span
         variants={fadeUp}

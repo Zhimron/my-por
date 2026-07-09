@@ -5,8 +5,30 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['"Space Grotesk"', 'Inter', 'ui-sans-serif', 'sans-serif'],
+        sans: [
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI Variable"',
+          '"Segoe UI"',
+          'system-ui',
+          'Roboto',
+          '"Helvetica Neue"',
+          '"Noto Sans"',
+          'Arial',
+          'sans-serif',
+        ],
+        display: [
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI Variable"',
+          '"Segoe UI"',
+          'system-ui',
+          'Roboto',
+          '"Helvetica Neue"',
+          '"Noto Sans"',
+          'Arial',
+          'sans-serif',
+        ],
       },
       colors: {
         night: {
@@ -26,10 +48,6 @@ module.exports = {
           '33%': { transform: 'translate(40px, -60px) scale(1.1)' },
           '66%': { transform: 'translate(-30px, 30px) scale(0.95)' },
         },
-        'gradient-x': {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-        },
         marquee: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-50%)' },
@@ -42,7 +60,6 @@ module.exports = {
       animation: {
         blob: 'blob 18s ease-in-out infinite',
         'blob-slow': 'blob 26s ease-in-out infinite reverse',
-        'gradient-x': 'gradient-x 6s ease infinite',
         marquee: 'marquee 40s linear infinite',
         float: 'float 6s ease-in-out infinite',
       },

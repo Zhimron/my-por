@@ -19,4 +19,7 @@ export const categoryLabels: Record<ProjectCategory, string> = {
   web: 'Web',
   fullstack: 'Full-Stack',
   software: 'Software',
+  desktop: 'Desktop',
+  security: 'Security',
+  frontend: 'Frontend',
 };

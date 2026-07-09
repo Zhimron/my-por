@@ -1,6 +1,6 @@
 # ZHIM — Shimron M. Guray's Portfolio
 
-Premium, AI-inspired portfolio built with **React 19 + Vite + TypeScript + Tailwind CSS + Framer Motion**.
+Premium portfolio built with **React 19 + Vite + TypeScript + Tailwind CSS + Framer Motion**.
 
 Dark/light mode, glassmorphism, scroll-linked animations, project search & filtering, per-project case-study pages, live GitHub activity, and a single-file content layer.
 

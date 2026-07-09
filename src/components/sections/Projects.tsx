@@ -10,7 +10,15 @@ import ProjectCard from '../ui/ProjectCard';
 type CategoryFilter = ProjectCategory | 'all';
 
 /** Only offer category filters that actually have projects. */
-const allCategories: ProjectCategory[] = ['ai', 'web', 'fullstack', 'software'];
+const allCategories: ProjectCategory[] = [
+  'ai',
+  'web',
+  'fullstack',
+  'software',
+  'desktop',
+  'security',
+  'frontend',
+];
 const categories: CategoryFilter[] = [
   'all',
   ...allCategories.filter((c) => portfolio.projects.some((p) => p.category === c)),
@@ -37,7 +45,7 @@ const Projects = () => {
   const hasFilters = query !== '' || category !== 'all' || tag !== null;
 
   return (
-    <section id="projects" className="section-container scroll-mt-24 py-24">
+    <section id="projects" className="section-container scroll-mt-24 pt-16 pb-10">
       <SectionHeading
         eyebrow="My work"
         title="Projects"

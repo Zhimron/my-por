@@ -9,6 +9,11 @@ const ScrollToHash = () => {
   const location = useLocation();
 
   useEffect(() => {
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0 });
+      return;
+    }
+
     if (location.hash) {
       const el = document.getElementById(location.hash.slice(1));
       if (el) {
