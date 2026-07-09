@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "ZHIM",
+  "name": "Shimron M. Guray — Portfolio",
+  "description": "AI Engineer, Full-Stack Developer and Software Engineer.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#0b1020",
+  "background_color": "#0b1020"
 }

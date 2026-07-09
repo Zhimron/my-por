@@ -5,6 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 const NotFound = () => {
   return (
     <div className="section-container flex min-h-[60vh] flex-col items-center justify-center py-24 text-center">
+      <title>Page not found | Shimron M. Guray</title>
       <motion.p
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}

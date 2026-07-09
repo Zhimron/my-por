@@ -11,6 +11,7 @@ import ScrollToHash from './components/layout/ScrollToHash';
 import Home from './pages/Home';
 import ProjectDetail from './pages/ProjectDetail';
 import NotFound from './pages/NotFound';
+import Analytics from './components/Analytics';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -29,6 +30,7 @@ function App() {
       >
         Skip to content
       </a>
+      <Analytics />
       <AnimatedBackground />
       <ScrollProgress />
       <ScrollToHash />

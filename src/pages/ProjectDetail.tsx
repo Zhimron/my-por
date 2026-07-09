@@ -17,6 +17,8 @@ const ProjectDetail = () => {
 
   return (
     <div className="section-container py-16">
+      <title>{`${project.title} | ${portfolio.personal.fullName}`}</title>
+      <meta name="description" content={project.description} />
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}>
         <Link
           to="/#projects"

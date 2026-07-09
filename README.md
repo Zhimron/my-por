@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# ZHIM — Shimron M. Guray's Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Premium, AI-inspired portfolio built with **React 19 + Vite + TypeScript + Tailwind CSS + Framer Motion**.
 
-## Available Scripts
+Dark/light mode, glassmorphism, scroll-linked animations, project search & filtering, per-project case-study pages, live GitHub activity, and a single-file content layer.
 
-In the project directory, you can run:
+## Quick start
 
-### `npm start`
+```bash
+npm install
+npm run dev      # dev server at http://localhost:3000
+npm run build    # type-check + production build to /dist
+npm run preview  # serve the production build locally
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Updating content (no component edits needed)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Everything on the site is driven by [`src/data/portfolio.ts`](src/data/portfolio.ts)** — typed by [`src/data/types.ts`](src/data/types.ts). Edit that one file to change:
 
-### `npm test`
+| What | Where in `portfolio.ts` |
+|---|---|
+| Name, roles, bio, email, location | `personal` |
+| Social links | `socials` |
+| Skills (8 categories, `featured` → Tech Stack marquee) | `skills` |
+| Projects (image, tech, links, features, status, category, tags) | `projects` |
+| Experience / education timeline | `experience` |
+| Certifications | `certifications` |
+| Services | `services` |
+| Testimonials | `testimonials` |
+| FAQ | `faq` |
+| GitHub username (activity section) | `github.username` |
+| SEO defaults | `seo` |
+| Visitor analytics | `analytics` |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Items marked `[SAMPLE]` in the file are placeholders — replace them with your real work.
 
-### `npm run build`
+### Things to replace
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Resume**: swap `public/resume.pdf` (current one is a generated placeholder).
+- **Project images**: replace the gradient SVGs in `src/assets/projects/` with real screenshots (16:9 works best), then update the imports at the top of `portfolio.ts`.
+- **LinkedIn URL** in `socials`, and your deployed **site URL** in `seo.url` + the `og:`/canonical tags in `index.html`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Enabling visitor analytics
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+In `portfolio.ts` set either:
 
-### `npm run eject`
+```ts
+analytics: { plausibleDomain: 'yourdomain.com' }
+// or
+analytics: { googleAnalyticsId: 'G-XXXXXXXXXX' }
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+No analytics load when neither is set.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Contact form
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+By default the form opens the visitor's email client (mailto). For real form delivery, create a free [Formspree](https://formspree.io) form and set:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```ts
+personal: { ..., contactFormEndpoint: 'https://formspree.io/f/yourid' }
+```
 
-## Learn More
+## Project structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+src/
+  data/            portfolio.ts (ALL content) + types.ts + navigation.ts
+  components/
+    layout/        Navbar, Footer, Loader, ScrollProgress, BackToTop, background
+    sections/      Hero, About, Skills, TechStack, Projects, AIProjects,
+                   Experience, Certifications, Services, GitHubActivity,
+                   Testimonials, FAQ, Contact
+    ui/            SectionHeading, ProjectCard, SocialIcon, FireWord
+  pages/           Home, ProjectDetail (/projects/:slug), NotFound
+  context/         ThemeContext (dark/light with system preference)
+  hooks/           useGitHub, useActiveSection
+  lib/             shared motion variants, project status/category metadata
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Deploying
 
-### Code Splitting
+- **Vercel / Netlify**: import the repo, framework = Vite. SPA routing works out of the box (Netlify may need a `/* /index.html 200` redirect).
+- **GitHub Pages**: set `base: '/My-Por/'` in `vite.config.ts` and add a 404.html SPA fallback, since deep links like `/projects/x` need rewriting.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Notes
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- The word *fire* in the About section keeps the original portfolio's hover easter egg. 🔥
+- Tests were removed with CRA; add [Vitest](https://vitest.dev) + Testing Library if you want them back.
