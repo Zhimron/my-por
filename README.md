@@ -80,7 +80,7 @@ src/
 ## Deploying
 
 - **Vercel / Netlify**: import the repo, framework = Vite. SPA routing works out of the box (Netlify may need a `/* /index.html 200` redirect).
-- **GitHub Pages**: set `base: '/My-Por/'` in `vite.config.ts` and add a 404.html SPA fallback, since deep links like `/projects/x` need rewriting.
+- **GitHub Pages**: set `base: '/my-por/'` in `vite.config.ts` and add a 404.html SPA fallback, since deep links like `/projects/x` need rewriting.
 
 ## Notes
 

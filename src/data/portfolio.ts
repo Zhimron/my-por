@@ -199,7 +199,7 @@ export const portfolio: Portfolio = {
         "A premium, AI-inspired portfolio built with Vite, React 19 and TypeScript. Every section is driven by one typed content file, so updating the site never means touching components. Features dark/light mode, glassmorphism, scroll-linked animations, project search and filtering, and per-project detail pages.",
       image: imgPortfolio,
       tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion"],
-      github: "https://github.com/Zhimron/My-Por",
+      github: "https://github.com/Zhimron/my-por",
       demo: undefined,
       features: [
         "Single-file typed content layer (CMS-style)",
@@ -539,7 +539,7 @@ export const portfolio: Portfolio = {
     description:
       "Portfolio of Shimron M. Guray — Programming Specialist, Full-Stack Developer and Software Engineer. Projects, skills, services and contact.",
     // TODO: set your deployed domain
-    url: "https://zhimron.github.io/My-Por",
+    url: "https://zhimron.github.io/my-por",
     keywords: [
       "Programming Specialist",
       "Full-Stack Developer",
