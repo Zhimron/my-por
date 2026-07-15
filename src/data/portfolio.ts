@@ -18,6 +18,7 @@ import imgTravelLog from "../assets/projects/image4.png";
 import imgEnrollment from "../assets/projects/enrollment-admission.svg";
 import imgCooperative from "../assets/projects/cooperative-system.svg";
 import imgAccounting from "../assets/projects/accounting-system.svg";
+import imgHandGestureRecognition from "../assets/projects/Screenshot 2026-07-15 094741.png";
 
 
 export const portfolio: Portfolio = {
@@ -145,6 +146,59 @@ export const portfolio: Portfolio = {
         "Inventory",
         "POS",
         "SQL Server",
+      ],
+      featured: true,
+      year: 2026,
+    },
+    {
+      slug: "HandGestureRecognition",
+      title: "Hand Gesture Recognition System",
+      description:
+        "AI-powered desktop application that recognizes hand gestures in real time for gesture recognition, mouse control, keyboard automation, and custom gesture training.",
+      longDescription:
+        "Hand Gesture Recognition System is a modular desktop application built with Python, MediaPipe, OpenCV, and PySide6 that enables real-time hand tracking and gesture recognition using a webcam. The system supports multiple AI-powered features including live hand detection, custom gesture recording, mouse control, keyboard automation, and a modern desktop interface. Designed with a multithreaded architecture, it separates camera capture, AI inference, and rendering pipelines to maintain high performance and responsive user interaction while minimizing CPU usage and latency.",
+      image: imgHandGestureRecognition,
+      tech: [
+        "Python",
+        "MediaPipe",
+        "OpenCV",
+        "PySide6",
+        "NumPy",
+        "JSON",
+        "Threading",
+        "Computer Vision",
+        "AI",
+      ],
+      github: "https://github.com/Zhimron/Hand-Gesture-Recognition",
+      features: [
+        "Real-time webcam initialization and camera selection",
+        "AI-powered hand detection with MediaPipe",
+        "Recognition of multiple predefined hand gestures",
+        "Finger state detection (open and closed fingers)",
+        "Handedness detection with confidence scoring",
+        "Custom gesture recording and JSON-based storage",
+        "Automatic loading of custom-trained gestures",
+        "Gesture confidence filtering and smoothing",
+        "Threaded camera capture, inference, and rendering pipeline",
+        "Mouse cursor control using hand gestures",
+        "Left click, right click, drag, scroll, and double-click gestures",
+        "Keyboard automation using configurable gesture mappings",
+        "Live FPS monitoring and performance overlay",
+        "Dark-mode desktop application built with PySide6",
+        "Gesture recording and settings management interface",
+        "Configurable AI detection and tracking confidence",
+        "Professional modular architecture for future AI expansion",
+      ],
+      status: "completed",
+      category: "ai",
+      tags: [
+        "Artificial Intelligence",
+        "Computer Vision",
+        "Machine Learning",
+        "Python",
+        "MediaPipe",
+        "Automation",
+        "Desktop Application",
       ],
       featured: true,
       year: 2026,
@@ -406,7 +460,8 @@ export const portfolio: Portfolio = {
       location: "Philippines",
       start: "2017",
       end: "2019",
-      description: "Senior high school specialization in ICT and programming fundamentals.",
+      description:
+        "Senior high school specialization in ICT and programming fundamentals.",
       highlights: [],
       type: "education",
     },
