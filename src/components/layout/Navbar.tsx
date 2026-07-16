@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
@@ -8,15 +8,14 @@ import {
   Handshake,
   Menu,
   MessageCircle,
-  Moon,
   Rocket,
-  Sun,
   UserRound,
   X,
 } from 'lucide-react';
 import { navbarSections } from '../../data/navigation';
 import { portfolio } from '../../data/portfolio';
 import { useTheme } from '../../context/ThemeContext';
+import ThemeEye from '../ui/ThemeEye';
 
 /** Maps the `icon` name on each NavSection to its lucide component. */
 const iconMap: Record<string, typeof UserRound> = {
@@ -33,6 +32,7 @@ const Navbar = () => {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const navGlowRef = useRef<HTMLDivElement>(null);
   const isHome = location.pathname === '/';
   const active = navbarSections.find((section) => {
     if (section.path === '/projects') {
@@ -55,11 +55,23 @@ const Navbar = () => {
     setMenuOpen(false);
   }, [location.pathname, location.hash]);
 
+  const handleNavPointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    navGlowRef.current?.style.setProperty(
+      '--nav-x',
+      `${event.clientX - rect.left}px`,
+    );
+    navGlowRef.current?.style.setProperty(
+      '--nav-y',
+      `${event.clientY - rect.top}px`,
+    );
+  };
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 border-b transition-all duration-300 ${
         scrolled || isHome
-          ? 'border-slate-200/70 bg-white/70 shadow-sm shadow-slate-900/5 backdrop-blur-2xl dark:border-white/10 dark:bg-night/70 dark:shadow-black/20'
+          ? 'border-slate-200/70 bg-white/80 shadow-sm shadow-slate-900/5 backdrop-blur-2xl dark:border-white/10 dark:bg-night/80 dark:shadow-black/20'
           : 'border-transparent bg-transparent'
       }`}
     >
@@ -67,70 +79,102 @@ const Navbar = () => {
         aria-label="Main navigation"
         className="section-container flex h-16 items-center justify-between"
       >
-        <Link
-          to="/"
-          className="inline-flex items-center rounded-xl px-1 py-1 font-display text-3xl font-extrabold tracking-tight gradient-text transition-transform duration-300 hover:-translate-y-0.5 sm:text-[2rem]"
-          aria-label={`${portfolio.personal.fullName} home`}
-          onClick={() => setMenuOpen(false)}
+        <motion.div
+          whileHover={{ y: -2, scale: 1.025 }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ type: 'spring', stiffness: 360, damping: 22 }}
         >
-          {portfolio.personal.brand}
-        </Link>
-
-        <ul className="hidden items-center gap-1.5 lg:flex">
-          {navbarSections.map((section) => {
-            const Icon = section.icon ? iconMap[section.icon] : null;
-            const isActive = active === section.id;
-            return (
-              <li key={section.id} className="group relative">
-                <Link
-                  to={section.path}
-                  aria-current={isActive ? 'page' : undefined}
-                  className={`relative flex items-center gap-1.5 rounded-xl border px-3.5 py-2 text-sm font-semibold transition-all duration-300 xl:px-4 ${
-                    isActive
-                      ? 'border-indigo-300/70 text-indigo-700 dark:border-cyan-300/30 dark:text-cyan-100'
-                      : 'border-slate-200/70 bg-white/60 text-slate-600 shadow-sm shadow-slate-900/5 backdrop-blur-xl hover:-translate-y-0.5 hover:border-indigo-300/60 hover:text-slate-950 hover:shadow-md hover:shadow-slate-900/5 dark:border-white/10 dark:bg-white/[0.045] dark:text-slate-300 dark:hover:border-cyan-300/30 dark:hover:text-white'
-                  }`}
+          <Link
+            to="/"
+            className="group relative inline-flex items-center gap-2 py-2"
+            aria-label={`${portfolio.personal.fullName} home`}
+            onClick={() => setMenuOpen(false)}
+          >
+            <span className="flex font-display text-[1.65rem] font-black leading-none tracking-[-0.09em] text-slate-950 dark:text-white">
+              {portfolio.personal.brand.split('').map((letter, index) => (
+                <motion.span
+                  key={`${letter}-${index}`}
+                  whileHover={{ y: -3 }}
+                  transition={{ type: 'spring', stiffness: 450, damping: 20 }}
+                  className="bg-gradient-to-br from-slate-950 via-indigo-700 to-cyan-600 bg-clip-text pr-[0.04em] text-transparent dark:from-white dark:via-indigo-200 dark:to-cyan-300"
                 >
-                  {isActive && (
-                    <motion.span
-                      layoutId="nav-active-pill"
-                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500/15 to-violet-500/10 shadow-sm shadow-indigo-500/10 dark:from-cyan-300/10 dark:to-indigo-400/10"
-                      transition={{ type: 'spring', stiffness: 420, damping: 34 }}
-                    />
-                  )}
-                  {Icon && (
-                    <Icon size={15} className="relative z-10" aria-hidden="true" />
-                  )}
-                  <span className="relative z-10">{section.label}</span>
-                </Link>
+                  {letter}
+                </motion.span>
+              ))}
+            </span>
+            <span className="relative mt-3 h-2 w-2 overflow-hidden rounded-sm bg-indigo-600 transition-transform duration-300 group-hover:rotate-45 dark:bg-cyan-300">
+              <span className="absolute inset-0 translate-y-full bg-cyan-400 transition-transform duration-300 group-hover:translate-y-0" />
+            </span>
+            <span className="absolute inset-x-0 -bottom-0.5 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-indigo-600 to-cyan-400 transition-transform duration-300 group-hover:scale-x-100" />
+          </Link>
+        </motion.div>
 
-                {section.hint && (
-                  <span
-                    role="tooltip"
-                    className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 w-max max-w-[11rem] -translate-x-1/2 translate-y-1 rounded-lg border border-slate-200/80 bg-white px-2.5 py-1.5 text-center text-[11px] font-medium leading-snug text-slate-600 opacity-0 shadow-lg shadow-slate-900/10 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 dark:border-white/10 dark:bg-night-700 dark:text-slate-300"
+        <div
+          onPointerMove={handleNavPointerMove}
+          className="group relative hidden overflow-hidden rounded-2xl border border-slate-200/80 bg-white/65 p-1 shadow-sm shadow-slate-900/5 backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.045] lg:block"
+        >
+          <div
+            ref={navGlowRef}
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            style={{
+              background:
+                'radial-gradient(110px circle at var(--nav-x, 50%) var(--nav-y, 50%), rgba(99, 102, 241, 0.2), transparent 72%)',
+            }}
+          />
+
+          <ul className="relative flex items-center gap-1">
+            {navbarSections.map((section) => {
+              const isActive = active === section.id;
+              return (
+                <motion.li
+                  key={section.id}
+                  className="relative"
+                  whileHover={{ y: -2, scale: 1.025 }}
+                  whileTap={{ scale: 0.96 }}
+                  transition={{ type: 'spring', stiffness: 420, damping: 24 }}
+                >
+                  <Link
+                    to={section.path}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={`group/item relative flex items-center overflow-hidden rounded-xl px-3.5 py-2 text-sm font-bold transition-colors duration-300 xl:px-4 ${
+                      isActive
+                        ? 'text-slate-950 dark:text-white'
+                        : 'text-slate-500 hover:bg-white/55 hover:text-slate-950 dark:text-slate-400 dark:hover:bg-white/[0.055] dark:hover:text-white'
+                    }`}
                   >
-                    {section.hint}
-                  </span>
-                )}
-              </li>
-            );
-          })}
-        </ul>
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-active-pill"
+                        className="absolute inset-0 rounded-xl bg-slate-100 shadow-sm dark:bg-white/10"
+                        transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                      />
+                    )}
+                    <span className="relative z-10 transition-transform duration-300 group-hover/item:-translate-y-0.5">
+                      {section.label}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className={`absolute bottom-1 left-1/2 z-10 h-1 w-1 -translate-x-1/2 rounded-full bg-indigo-500 transition-all duration-300 dark:bg-cyan-300 ${
+                        isActive
+                          ? 'scale-100 opacity-100'
+                          : 'scale-0 opacity-0 group-hover/item:scale-100 group-hover/item:opacity-100'
+                      }`}
+                    />
+                  </Link>
+                </motion.li>
+              );
+            })}
+          </ul>
+        </div>
 
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={toggleTheme}
-            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/70 bg-white/70 text-slate-600 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-300 hover:text-indigo-600 dark:border-white/10 dark:bg-white/[0.055] dark:text-slate-300 dark:hover:border-cyan-300/30 dark:hover:text-cyan-200"
-          >
-            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
+          <ThemeEye theme={theme} onToggle={toggleTheme} />
 
           <a
             href={portfolio.personal.resumeUrl}
-            download
-            className="btn-primary hidden !rounded-xl !px-4 !py-2 sm:inline-flex"
+            download="Shimron-Guray-Resume.pdf"
+            className="group hidden items-center gap-2 rounded-xl bg-slate-950 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-slate-950/15 transition-all duration-300 hover:-translate-y-0.5 hover:bg-indigo-600 hover:shadow-indigo-500/25 dark:bg-white dark:text-slate-950 dark:hover:bg-cyan-200 sm:inline-flex"
           >
             <Download size={16} aria-hidden="true" />
             Resume
@@ -141,7 +185,7 @@ const Navbar = () => {
             onClick={() => setMenuOpen((v) => !v)}
             aria-expanded={menuOpen}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/70 bg-white/70 text-slate-600 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/[0.055] dark:text-slate-300 lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/70 bg-white/70 text-slate-600 shadow-sm backdrop-blur transition-colors hover:border-indigo-300 hover:text-indigo-600 dark:border-white/10 dark:bg-white/[0.055] dark:text-slate-300 dark:hover:border-cyan-300/30 dark:hover:text-cyan-200 lg:hidden"
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -198,7 +242,7 @@ const Navbar = () => {
               <li className="sm:col-span-2">
                 <a
                   href={portfolio.personal.resumeUrl}
-                  download
+                  download="Shimron-Guray-Resume.pdf"
                   className="btn-primary mt-2 w-full justify-center !rounded-xl"
                   onClick={() => setMenuOpen(false)}
                 >

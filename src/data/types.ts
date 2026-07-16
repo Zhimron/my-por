@@ -46,9 +46,39 @@ export type SkillCategory =
   | 'DevOps'
   | 'Tools';
 
+export type SkillIconName =
+  | 'typescript'
+  | 'javascript'
+  | 'python'
+  | 'php'
+  | 'dotnet'
+  | 'csharp'
+  | 'sql'
+  | 'react'
+  | 'tailwindcss'
+  | 'framer'
+  | 'html5'
+  | 'vite'
+  | 'nodejs'
+  | 'laravel'
+  | 'api'
+  | 'mongodb'
+  | 'mysql'
+  | 'vercel'
+  | 'cloud'
+  | 'docker'
+  | 'githubactions'
+  | 'git'
+  | 'vscode'
+  | 'figma'
+  | 'postman'
+  | 'beekeeperstudio';
+
 export interface Skill {
   name: string;
   category: SkillCategory;
+  /** Brand or technology icon displayed anywhere this skill appears. */
+  icon: SkillIconName;
   /** Featured skills also appear in the Tech Stack marquee. */
   featured?: boolean;
 }

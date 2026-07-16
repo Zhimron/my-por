@@ -1,8 +1,8 @@
+import { useRef, type PointerEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   ArrowRight,
-  BrainCircuit,
   CheckCircle2,
   Code2,
   Download,
@@ -11,31 +11,35 @@ import {
   MapPin,
   ShieldCheck,
   Sparkles,
-  Terminal,
+  Workflow,
 } from 'lucide-react';
-import { featuredSkills, portfolio } from '../data/portfolio';
+import { portfolio } from '../data/portfolio';
 import SocialIcon from '../components/ui/SocialIcon';
+import SkillIcon from '../components/ui/SkillIcon';
 
-const professionalTitle = 'AI Engineer / Full Stack Developer';
+const professionalTitle = 'Programming Specialist / Full-Stack Developer';
 
 const intro =
-  'I build production-minded AI and full-stack systems: clean interfaces, reliable backends, and automation that turns ideas into useful software.';
+  'I design and build reliable web and desktop software—from polished interfaces to backend systems, databases, and practical automation.';
 
-const coreSkills = [
+const capabilities = [
   {
-    title: 'AI Workflows',
-    detail: 'Practical automation, data flows, and AI-assisted product features.',
-    icon: BrainCircuit,
-  },
-  {
-    title: 'Full-Stack Apps',
-    detail: 'React interfaces, typed APIs, authentication, and deployable systems.',
+    title: 'Full-Stack Products',
+    detail: 'Responsive interfaces, APIs, authentication, and data.',
     icon: Layers,
+    accent: 'text-indigo-600 dark:text-indigo-300',
   },
   {
-    title: 'Secure Systems',
-    detail: 'Desktop, web, and backend builds with reliability in the details.',
+    title: 'Business Systems',
+    detail: 'Purpose-built tools that simplify real operations.',
+    icon: Code2,
+    accent: 'text-cyan-600 dark:text-cyan-300',
+  },
+  {
+    title: 'Reliable Delivery',
+    detail: 'Maintainable builds with security in the details.',
     icon: ShieldCheck,
+    accent: 'text-emerald-600 dark:text-emerald-300',
   },
 ];
 
@@ -50,305 +54,273 @@ const techHighlights = [
   'Git',
 ];
 
-const itemMotion = {
+const reveal = {
   hidden: { opacity: 0, y: 18 },
   visible: { opacity: 1, y: 0 },
 };
 
 const Home = () => {
   const { personal } = portfolio;
-  const selectedProjects = portfolio.projects.filter((p) => p.featured).slice(0, 3);
+  const panelGlowRef = useRef<HTMLDivElement>(null);
+  const featuredProject =
+    portfolio.projects.find((project) => project.featured) ?? portfolio.projects[0];
   const yearsExperience = Math.max(1, new Date().getFullYear() - 2023);
-  const topSkills = featuredSkills.slice(0, 8);
 
   const stats = [
-    { label: 'Years Experience', shortLabel: 'Years', value: `${yearsExperience}+` },
-    {
-      label: 'Projects Completed',
-      shortLabel: 'Projects',
-      value: `${portfolio.projects.length}+`,
-    },
-    { label: 'Certifications', shortLabel: 'Certs', value: `${portfolio.certifications.length}` },
+    { label: 'Years building', value: `${yearsExperience}+` },
+    { label: 'Projects', value: `${portfolio.projects.length}+` },
+    { label: 'Credentials', value: `${portfolio.certifications.length}` },
   ];
 
+  const handlePanelPointerMove = (event: PointerEvent<HTMLElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    panelGlowRef.current?.style.setProperty('--panel-x', `${x}px`);
+    panelGlowRef.current?.style.setProperty('--panel-y', `${y}px`);
+  };
+
   return (
-    <section className="relative isolate h-[calc(100svh-4rem)] overflow-hidden">
+    <section className="relative isolate min-h-[calc(100svh-4rem)] overflow-x-hidden lg:h-[calc(100svh-4rem)] lg:overflow-hidden">
       <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-cyan-50 dark:from-[#070913] dark:via-night dark:to-[#101424]" />
-        <div className="absolute inset-0 bg-grid opacity-70 dark:opacity-50" />
+        <div className="absolute inset-0 bg-[linear-gradient(135deg,#f8fafc_0%,#ffffff_48%,#eef2ff_100%)] dark:bg-[linear-gradient(135deg,#070913_0%,#0b1020_52%,#11152b_100%)]" />
+        <div className="absolute inset-0 bg-grid opacity-60 dark:opacity-35" />
         <motion.div
-          animate={{ x: ['-8%', '8%', '-8%'], opacity: [0.32, 0.5, 0.32] }}
-          transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute inset-y-[-20%] left-1/2 w-2/3 -translate-x-1/2 rotate-12 bg-[linear-gradient(90deg,transparent,rgba(34,211,238,0.18),rgba(168,85,247,0.12),transparent)] blur-3xl"
+          animate={{ x: ['-6%', '6%', '-6%'], scale: [1, 1.08, 1] }}
+          transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute -left-32 top-1/4 h-[28rem] w-[28rem] rounded-full bg-indigo-400/15 blur-[110px] dark:bg-indigo-500/15"
         />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white via-white/80 to-transparent dark:from-night dark:via-night/80" />
+        <div className="absolute -right-32 bottom-[-12rem] h-[34rem] w-[34rem] rounded-full bg-cyan-300/20 blur-[120px] dark:bg-cyan-400/10" />
       </div>
 
-      <div className="section-container relative z-10 flex h-full flex-col gap-2 py-2 sm:gap-4 sm:py-5 lg:gap-5 lg:py-6">
+      <div className="section-container relative z-10 grid min-h-[calc(100svh-4rem)] gap-8 py-8 lg:h-full lg:min-h-0 lg:grid-cols-[minmax(0,1.04fr)_minmax(520px,0.96fr)] lg:items-center lg:gap-12 lg:py-6 xl:gap-20">
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: 'easeOut' }}
-          className="flex shrink-0 items-center justify-between gap-3"
+          initial="hidden"
+          animate="visible"
+          transition={{ staggerChildren: 0.09 }}
+          className="flex min-w-0 flex-col justify-center"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-700 shadow-sm shadow-emerald-500/10 dark:text-emerald-300">
-            <span className="relative flex h-2 w-2" aria-hidden="true">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-            </span>
-            Available for work
-          </span>
-
-          <span className="hidden items-center gap-2 rounded-full border border-slate-200/70 bg-white/70 px-3 py-1.5 text-xs font-medium text-slate-600 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-300 sm:inline-flex">
-            <MapPin size={14} aria-hidden="true" />
-            {personal.location}
-          </span>
-        </motion.div>
-
-        <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,1.02fr)_minmax(390px,0.98fr)] lg:gap-6">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            transition={{ staggerChildren: 0.08 }}
-            className="flex min-h-0 min-w-0 flex-col justify-center gap-3 lg:gap-6"
-          >
-            <motion.div variants={itemMotion} className="max-w-3xl">
-              <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-indigo-300/40 bg-white/70 px-3 py-1.5 text-xs font-semibold text-indigo-700 shadow-sm backdrop-blur dark:border-cyan-300/20 dark:bg-white/[0.05] dark:text-cyan-200 sm:mb-3">
-                <Sparkles size={14} aria-hidden="true" />
-                Modern AI-powered software
-              </div>
-
-              <h1 className="font-display text-3xl font-bold leading-[1.02] text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
-                {personal.fullName}
-              </h1>
-              <p className="mt-2 bg-gradient-to-r from-indigo-600 via-cyan-500 to-emerald-500 bg-clip-text font-display text-xl font-semibold text-transparent dark:from-cyan-200 dark:via-violet-200 dark:to-emerald-200 sm:text-2xl lg:text-3xl">
-                {professionalTitle}
-              </p>
-              <p className="mt-3 line-clamp-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300 sm:mt-4 sm:line-clamp-none sm:text-base">
-                {intro}
-              </p>
-            </motion.div>
-
-            <motion.div
-              variants={itemMotion}
-              className="grid min-w-0 grid-cols-3 items-center gap-2 sm:flex sm:flex-wrap sm:gap-3"
-            >
-              <Link
-                to="/projects"
-                className="btn-primary min-w-0 justify-center !rounded-lg !px-2 !py-2.5 !text-xs sm:!px-4 sm:!text-sm"
-              >
-                <Terminal size={16} aria-hidden="true" />
-                View Projects
-              </Link>
-              <Link
-                to="/contact"
-                className="btn-ghost min-w-0 justify-center !rounded-lg !px-2 !py-2.5 !text-xs sm:!px-4 sm:!text-sm"
-              >
-                <Mail size={16} aria-hidden="true" />
-                Contact Me
-              </Link>
-              <a
-                href={personal.resumeUrl}
-                download
-                className="btn-ghost min-w-0 justify-center !rounded-lg !px-2 !py-2.5 !text-xs sm:!px-4 sm:!text-sm"
-              >
-                <Download size={16} aria-hidden="true" />
-                Resume
-              </a>
-            </motion.div>
-
-            <motion.div variants={itemMotion} className="flex min-w-0 flex-wrap items-center gap-3">
-              <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
-                Connect
+          <motion.div variants={reveal} className="flex flex-wrap items-center gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-emerald-700 dark:text-emerald-300">
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
               </span>
-              <div className="flex gap-2">
-                {portfolio.socials.map((social) => (
-                  <a
-                    key={social.id}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200/70 bg-white/70 text-slate-600 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-300 hover:text-indigo-600 hover:shadow-lg hover:shadow-indigo-500/10 dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-300 dark:hover:border-cyan-300/30 dark:hover:text-cyan-200"
-                  >
-                    <SocialIcon icon={social.icon} />
-                  </a>
-                ))}
-              </div>
-            </motion.div>
+              Available for work
+            </span>
+            <span className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-slate-400 dark:text-slate-500">
+              Portfolio / 2026
+            </span>
           </motion.div>
 
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            transition={{ staggerChildren: 0.08, delayChildren: 0.15 }}
-            className="grid min-h-0 min-w-0 gap-2 overflow-y-auto sm:grid-cols-2 sm:gap-3 lg:grid-rows-[auto_auto_auto]"
-          >
-            <motion.div
-              variants={itemMotion}
-              className="grid min-w-0 grid-cols-3 gap-2 sm:col-span-2"
+          <motion.div variants={reveal} className="mt-6 max-w-4xl">
+            <div className="mb-3 inline-flex items-center gap-2 text-sm font-bold text-indigo-600 dark:text-cyan-300">
+              <Sparkles size={16} aria-hidden="true" />
+              Ideas engineered into working software
+            </div>
+            <h1 className="font-display text-[clamp(3rem,5.2vw,6.25rem)] font-black leading-[0.94] tracking-[-0.055em] text-slate-950 dark:text-white">
+              Shimron M. Guray
+            </h1>
+            <p className="mt-4 bg-gradient-to-r from-indigo-600 via-violet-600 to-cyan-600 bg-clip-text font-display text-[clamp(1.25rem,2.1vw,2.25rem)] font-extrabold leading-tight tracking-[-0.025em] text-transparent dark:from-cyan-200 dark:via-indigo-200 dark:to-violet-200">
+              {professionalTitle}
+            </p>
+            <p className="mt-5 max-w-2xl text-base font-medium leading-7 text-slate-600 dark:text-slate-300 lg:text-lg">
+              {intro}
+            </p>
+          </motion.div>
+
+          <motion.div variants={reveal} className="mt-7 flex flex-wrap gap-3">
+            <Link
+              to="/projects"
+              className="group inline-flex items-center gap-2 rounded-xl bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-xl shadow-slate-950/15 transition-all duration-300 hover:-translate-y-1 hover:bg-indigo-600 hover:shadow-indigo-500/25 dark:bg-white dark:text-slate-950 dark:hover:bg-cyan-200"
             >
-              {stats.map((stat) => (
-                <Link
-                  key={stat.label}
-                  to="/experience"
-                  className="min-w-0 rounded-lg border border-slate-200/70 bg-white/75 p-2.5 shadow-sm shadow-slate-900/5 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/70 dark:border-white/10 dark:bg-white/[0.055] dark:shadow-black/20 sm:p-3"
-                >
-                  <p className="font-display text-xl font-bold text-slate-950 dark:text-white sm:text-2xl">
-                    {stat.value}
-                  </p>
-                  <p className="mt-1 text-[0.68rem] font-medium leading-4 text-slate-500 dark:text-slate-400 sm:text-xs">
-                    <span className="sm:hidden">{stat.shortLabel}</span>
-                    <span className="hidden sm:inline">{stat.label}</span>
-                  </p>
-                </Link>
-              ))}
-            </motion.div>
-
-            <motion.article
-              variants={itemMotion}
-              className="min-w-0 rounded-lg border border-slate-200/70 bg-white/75 p-3 shadow-sm shadow-slate-900/5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-indigo-300/80 dark:border-white/10 dark:bg-white/[0.055] dark:shadow-black/20 sm:p-4"
-            >
-              <Link to="/skills" className="group block">
-                <div className="flex items-center gap-2">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-600 transition-colors group-hover:bg-indigo-600 group-hover:text-white dark:bg-cyan-300/10 dark:text-cyan-200">
-                    <Code2 size={18} aria-hidden="true" />
-                  </span>
-                  <div>
-                    <h2 className="font-display text-sm font-semibold text-slate-950 dark:text-white">
-                      Tech Stack
-                    </h2>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
-                      Tools I ship with
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-3 flex flex-wrap gap-2 sm:mt-4">
-                  {[...new Set([...techHighlights, ...topSkills.map((s) => s.name)])]
-                    .slice(0, 10)
-                    .map((skill, index) => (
-                      <span
-                        key={skill}
-                        className={`rounded-lg border border-slate-200/80 bg-slate-50/90 px-2.5 py-1 text-xs font-semibold text-slate-700 transition-colors group-hover:border-indigo-300 dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-200 ${
-                          index > 7 ? 'hidden sm:inline-flex' : ''
-                        }`}
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                </div>
-              </Link>
-            </motion.article>
-
-            <motion.article
-              variants={itemMotion}
-              className="min-w-0 rounded-lg border border-slate-200/70 bg-white/75 p-3 shadow-sm shadow-slate-900/5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-emerald-300/80 dark:border-white/10 dark:bg-white/[0.055] dark:shadow-black/20 sm:p-4"
-            >
-              <Link to="/services" className="group block">
-                <div className="flex items-center gap-2">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 transition-colors group-hover:bg-emerald-600 group-hover:text-white dark:bg-emerald-300/10 dark:text-emerald-200">
-                    <BrainCircuit size={18} aria-hidden="true" />
-                  </span>
-                  <div>
-                    <h2 className="font-display text-sm font-semibold text-slate-950 dark:text-white">
-                      Core Skills
-                    </h2>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
-                      How I create value
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-3 space-y-2 sm:mt-4 sm:space-y-3">
-                  {coreSkills.map((skill) => {
-                    const Icon = skill.icon;
-                    return (
-                      <div key={skill.title} className="flex gap-3">
-                        <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-700 dark:bg-white/[0.07] dark:text-slate-200">
-                          <Icon size={15} aria-hidden="true" />
-                        </span>
-                        <div>
-                          <h3 className="text-xs font-semibold text-slate-950 dark:text-white">
-                            {skill.title}
-                          </h3>
-                          <p className="mt-0.5 hidden line-clamp-1 text-xs leading-5 text-slate-500 dark:text-slate-400 sm:block">
-                            {skill.detail}
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </Link>
-            </motion.article>
-
-            <motion.article
-              variants={itemMotion}
-              className="hidden rounded-lg border border-slate-200/70 bg-white/75 p-4 shadow-sm shadow-slate-900/5 backdrop-blur transition-all duration-300 hover:border-violet-300/80 dark:border-white/10 dark:bg-white/[0.055] dark:shadow-black/20 sm:col-span-2 md:block"
-            >
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <h2 className="font-display text-sm font-semibold text-slate-950 dark:text-white">
-                    Selected Work
-                  </h2>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
-                    Compact preview of recent builds
-                  </p>
-                </div>
-                <Link
-                  to="/projects"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white/80 px-3 py-2 text-xs font-semibold text-slate-700 transition-all hover:-translate-y-0.5 hover:border-indigo-300 hover:text-indigo-600 dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-200 dark:hover:border-cyan-300/30 dark:hover:text-cyan-200"
-                >
-                  Explore
-                  <ArrowRight size={14} aria-hidden="true" />
-                </Link>
-              </div>
-
-              <div className="mt-4 grid gap-2 md:grid-cols-3">
-                {selectedProjects.map((project) => (
-                  <Link
-                    key={project.slug}
-                    to={`/projects/${project.slug}`}
-                    className="group rounded-lg border border-slate-200/80 bg-slate-50/80 p-2.5 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-300 hover:bg-white hover:shadow-lg hover:shadow-indigo-500/10 dark:border-white/10 dark:bg-white/[0.045] dark:hover:border-cyan-300/30 dark:hover:bg-white/[0.075]"
-                  >
-                    <div className="flex items-center gap-3 md:block">
-                      <img
-                        src={project.image}
-                        alt=""
-                        className="h-12 w-12 shrink-0 rounded-lg object-cover md:h-16 md:w-full"
-                        loading="lazy"
-                      />
-                      <div className="min-w-0 md:mt-2">
-                        <h3 className="truncate text-xs font-semibold text-slate-950 transition-colors group-hover:text-indigo-600 dark:text-white dark:group-hover:text-cyan-200">
-                          {project.title}
-                        </h3>
-                        <p className="mt-1 line-clamp-2 text-xs leading-4 text-slate-500 dark:text-slate-400">
-                          {project.tech.slice(0, 2).join(' / ')}
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </motion.article>
-
-            <motion.div
-              variants={itemMotion}
-              className="hidden items-center gap-2 rounded-lg border border-slate-200/70 bg-white/75 p-3 text-xs text-slate-600 shadow-sm shadow-slate-900/5 backdrop-blur dark:border-white/10 dark:bg-white/[0.055] dark:text-slate-300 sm:col-span-2 lg:flex"
-            >
-              <CheckCircle2
+              Explore my work
+              <ArrowRight
                 size={16}
                 aria-hidden="true"
-                className="shrink-0 text-emerald-500"
+                className="transition-transform group-hover:translate-x-1"
               />
-              <span className="font-medium">
-                Use the navbar to open full pages for about, skills, projects,
-                experience, services, and contact.
-              </span>
-            </motion.div>
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-300/80 bg-white/65 px-5 py-3 text-sm font-bold text-slate-800 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-indigo-400 hover:text-indigo-700 dark:border-white/15 dark:bg-white/[0.055] dark:text-white dark:hover:border-cyan-300/40 dark:hover:text-cyan-200"
+            >
+              <Mail size={16} aria-hidden="true" />
+              Start a conversation
+            </Link>
+            <a
+              href={personal.resumeUrl}
+              download="Shimron-Guray-Resume.pdf"
+              className="inline-flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-bold text-slate-500 transition-colors hover:text-indigo-600 dark:text-slate-400 dark:hover:text-cyan-200"
+            >
+              <Download size={16} aria-hidden="true" />
+              Resume
+            </a>
           </motion.div>
-        </div>
+
+          <motion.div
+            variants={reveal}
+            className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-slate-200/80 pt-5 dark:border-white/10"
+          >
+            <span className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 dark:text-slate-400">
+              <MapPin size={15} aria-hidden="true" />
+              {personal.location}
+            </span>
+            <span className="h-4 w-px bg-slate-200 dark:bg-white/10" aria-hidden="true" />
+            <div className="flex items-center gap-2">
+              {portfolio.socials.map((social) => (
+                <a
+                  key={social.id}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200/80 bg-white/70 text-slate-500 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-400 hover:text-indigo-600 dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-400 dark:hover:border-cyan-300/30 dark:hover:text-cyan-200"
+                >
+                  <SocialIcon icon={social.icon} size={16} />
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
+
+        <motion.aside
+          initial={{ opacity: 0, x: 28, scale: 0.98 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ duration: 0.65, delay: 0.15, ease: 'easeOut' }}
+          onPointerMove={handlePanelPointerMove}
+          className="group relative min-w-0 overflow-hidden rounded-[1.75rem] border border-slate-200/80 bg-white/75 p-4 shadow-2xl shadow-slate-900/10 backdrop-blur-2xl dark:border-white/10 dark:bg-white/[0.055] dark:shadow-black/30 sm:p-5 lg:max-h-full"
+        >
+          <div
+            ref={panelGlowRef}
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            style={{
+              background:
+                'radial-gradient(420px circle at var(--panel-x, 50%) var(--panel-y, 40%), rgba(99, 102, 241, 0.14), transparent 62%)',
+            }}
+          />
+          <div aria-hidden="true" className="absolute inset-0 bg-grid opacity-30 dark:opacity-20" />
+
+          <div className="relative flex items-center justify-between gap-4 border-b border-slate-200/80 pb-4 dark:border-white/10">
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-950 text-white shadow-lg dark:bg-white dark:text-slate-950">
+                <Workflow size={19} aria-hidden="true" />
+              </span>
+              <div>
+                <p className="font-display text-sm font-black text-slate-950 dark:text-white">
+                  Development profile
+                </p>
+                <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
+                  Full-stack systems, end to end
+                </p>
+              </div>
+            </div>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[11px] font-bold text-emerald-700 dark:text-emerald-300">
+              <CheckCircle2 size={13} aria-hidden="true" />
+              Open
+            </span>
+          </div>
+
+          <div className="relative mt-4 grid gap-2 sm:grid-cols-3">
+            {capabilities.map((capability) => {
+              const Icon = capability.icon;
+              return (
+                <motion.div
+                  key={capability.title}
+                  whileHover={{ y: -4 }}
+                  transition={{ type: 'spring', stiffness: 320, damping: 22 }}
+                  className="rounded-xl border border-slate-200/80 bg-white/70 p-3 dark:border-white/10 dark:bg-white/[0.045]"
+                >
+                  <Icon size={17} className={capability.accent} aria-hidden="true" />
+                  <h2 className="mt-2 text-xs font-black text-slate-950 dark:text-white">
+                    {capability.title}
+                  </h2>
+                  <p className="mt-1 line-clamp-2 text-[11px] font-medium leading-4 text-slate-500 dark:text-slate-400">
+                    {capability.detail}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <Link
+            to="/skills"
+            className="relative mt-3 block rounded-xl border border-slate-200/80 bg-slate-950/[0.025] p-3 transition-colors hover:border-indigo-300 dark:border-white/10 dark:bg-black/10 dark:hover:border-cyan-300/25"
+          >
+            <div className="mb-2.5 flex items-center justify-between gap-3">
+              <span className="text-xs font-black uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
+                Daily stack
+              </span>
+              <span className="text-[11px] font-bold text-indigo-600 dark:text-cyan-300">
+                View all
+              </span>
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {techHighlights.map((skillName) => {
+                const skill = portfolio.skills.find((item) => item.name === skillName);
+                return (
+                  <span
+                    key={skillName}
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200/80 bg-white px-2.5 py-1.5 text-[11px] font-bold text-slate-700 dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-200"
+                  >
+                    {skill && (
+                      <SkillIcon icon={skill.icon} className="h-3.5 w-3.5 shrink-0" />
+                    )}
+                    {skillName}
+                  </span>
+                );
+              })}
+            </div>
+          </Link>
+
+          {featuredProject && (
+            <Link
+              to={`/projects/${featuredProject.slug}`}
+              className="relative mt-3 flex items-center gap-3 rounded-xl border border-slate-200/80 bg-white/70 p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg hover:shadow-indigo-500/10 dark:border-white/10 dark:bg-white/[0.045] dark:hover:border-cyan-300/25"
+            >
+              <img
+                src={featuredProject.image}
+                alt=""
+                className="h-16 w-24 shrink-0 rounded-lg object-cover"
+              />
+              <div className="min-w-0">
+                <p className="text-[10px] font-black uppercase tracking-[0.14em] text-indigo-600 dark:text-cyan-300">
+                  Featured build
+                </p>
+                <h2 className="mt-1 truncate text-sm font-black text-slate-950 dark:text-white">
+                  {featuredProject.title}
+                </h2>
+                <p className="mt-1 truncate text-xs font-medium text-slate-500 dark:text-slate-400">
+                  {featuredProject.tech.slice(0, 3).join(' / ')}
+                </p>
+              </div>
+              <ArrowRight
+                size={16}
+                aria-hidden="true"
+                className="ml-auto shrink-0 text-slate-400"
+              />
+            </Link>
+          )}
+
+          <div className="relative mt-3 grid grid-cols-3 divide-x divide-slate-200 overflow-hidden rounded-xl border border-slate-200/80 bg-white/60 dark:divide-white/10 dark:border-white/10 dark:bg-white/[0.035]">
+            {stats.map((stat) => (
+              <Link
+                key={stat.label}
+                to="/experience"
+                className="px-3 py-3 text-center transition-colors hover:bg-indigo-500/5 dark:hover:bg-cyan-300/5"
+              >
+                <p className="font-display text-xl font-black text-slate-950 dark:text-white">
+                  {stat.value}
+                </p>
+                <p className="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-slate-400 dark:text-slate-500">
+                  {stat.label}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </motion.aside>
       </div>
     </section>
   );

@@ -35,16 +35,16 @@ export const portfolio: Portfolio = {
     intro:
       "I design and ship software across the whole stack — from VB.NET desktop systems where I started, to modern full-stack web applications. The fire to learn never went out.",
     about: [
-      "I'm Shimron M. Guray. I started as a systems developer working in Visual Basic, building desktop software before deciding to deep-dive into web development.",
-      "Here's the honest version: I'm lazy. Not the kind that avoids work — the kind that can't stand doing the same tedious step twice. If something felt slow or repetitive, I'd rather spend the extra hour figuring out how to automate it than grind through it by hand every single time. That impatience turned out to be useful — it's the same instinct that pulled me toward programming in the first place: let the machine handle the boring parts so I can move faster.",
-      "That instinct got tested in my capstone year. Our group needed a leader, and — half by circumstance, half because I'd already automated my share of the workload — it landed on me. I hadn't planned on leading anything. But once the responsibility was there, the laziness flipped into drive: the fastest way to a good outcome wasn't cutting corners, it was building something that actually worked the first time. I self-taught VB.NET deep enough to lead the build of a full laundry management system with IoT integration, pushed the team past the easy version of the project, and we came out with one of the strongest capstone systems in our batch. Stepping up, it turns out, wasn't about being the loudest person in the room — it was about being the one who couldn't stand watching something get built badly.",
-      "The fire in me that awakened back then is still flaming hot. Web development showed me a completely different way of building systems: hard, but genuinely enjoyable. There is always more to learn, and I take my time and enjoy the process.",
-      "Today I work across the stack — React and TypeScript on the front, Node.js on the back — turning ideas into fast, reliable products.",
+      "I'm Shimron M. Guray. My origin story started with Visual Basic and desktop systems — fewer capes, more forms, buttons, and databases. Then I found web development and willingly opened several hundred browser tabs.",
+      "Honest version: I'm productively lazy. If a task is slow, repetitive, or asks me to click the same thing twice, I start plotting its automation. I'd rather teach the machine once than lose the same staring contest with a tedious workflow every day.",
+      "That habit followed me into capstone year. Our group needed a leader; I had already automated my part, so apparently that made me qualified. I taught myself enough VB.NET to lead a laundry management system with IoT integration, pushed us beyond the easy version, and helped ship one of the strongest systems in our batch. Leadership, I learned, is mostly caring enough to fix the awkward parts before they become everyone's problem.",
+      "The fire that started there is still flaming hot. Web development turned 'this is hard' into 'one more commit.' There is always another tool to learn, another edge case hiding in a corner, and somehow I still enjoy the chase.",
+      "Today I work across the stack — React and TypeScript in the browser, Node.js behind the scenes, and a debugger nearby for emotional support. I like clean interfaces, reliable backends, and software that solves the problem without creating three new ones.",
     ],
     location: "Philippines",
     email: "gurayshimron@gmail.com",
     avatar,
-    resumeUrl: "/resume.pdf",
+    resumeUrl: `${import.meta.env.BASE_URL}resume.pdf`,
     availableForWork: true,
   },
 
@@ -72,38 +72,38 @@ export const portfolio: Portfolio = {
 
   skills: [
     // Languages
-    { name: "TypeScript", category: "Languages", featured: true },
-    { name: "JavaScript", category: "Languages", featured: true },
-    { name: "Python", category: "Languages", featured: true },
-    { name: "PHP", category: "Languages", featured: true },
-    { name: "VB.NET", category: "Languages" },
-    { name: "C#", category: "Languages" },
-    { name: "SQL", category: "Languages" },
+    { name: "TypeScript", category: "Languages", icon: "typescript", featured: true },
+    { name: "JavaScript", category: "Languages", icon: "javascript", featured: true },
+    { name: "Python", category: "Languages", icon: "python", featured: true },
+    { name: "PHP", category: "Languages", icon: "php", featured: true },
+    { name: "VB.NET", category: "Languages", icon: "dotnet" },
+    { name: "C#", category: "Languages", icon: "csharp" },
+    { name: "SQL", category: "Languages", icon: "sql" },
     // Frontend
-    { name: "React", category: "Frontend", featured: true },
-    { name: "Tailwind CSS", category: "Frontend", featured: true },
-    { name: "Framer Motion", category: "Frontend" },
-    { name: "HTML & CSS", category: "Frontend" },
-    { name: "Vite", category: "Frontend" },
+    { name: "React", category: "Frontend", icon: "react", featured: true },
+    { name: "Tailwind CSS", category: "Frontend", icon: "tailwindcss", featured: true },
+    { name: "Framer Motion", category: "Frontend", icon: "framer" },
+    { name: "HTML & CSS", category: "Frontend", icon: "html5" },
+    { name: "Vite", category: "Frontend", icon: "vite" },
     // Backend
-    { name: "Node.js", category: "Backend", featured: true },
-    { name: "Laravel", category: "Backend" },
-    { name: "REST APIs", category: "Backend" },
+    { name: "Node.js", category: "Backend", icon: "nodejs", featured: true },
+    { name: "Laravel", category: "Backend", icon: "laravel" },
+    { name: "REST APIs", category: "Backend", icon: "api" },
     // Databases
-    { name: "MongoDB", category: "Databases" },
-    { name: "MySQL", category: "Databases" },
+    { name: "MongoDB", category: "Databases", icon: "mongodb" },
+    { name: "MySQL", category: "Databases", icon: "mysql" },
     // Cloud
-    { name: "Vercel", category: "Cloud", featured: true },
-    { name: "Siteground", category: "Cloud" },
+    { name: "Vercel", category: "Cloud", icon: "vercel", featured: true },
+    { name: "Siteground", category: "Cloud", icon: "cloud" },
     // DevOps
-    { name: "Docker", category: "DevOps", featured: true },
-    { name: "GitHub Actions", category: "DevOps" },
+    { name: "Docker", category: "DevOps", icon: "docker", featured: true },
+    { name: "GitHub Actions", category: "DevOps", icon: "githubactions" },
     // Tools
-    { name: "Git", category: "Tools", featured: true },
-    { name: "VS Code", category: "Tools" },
-    { name: "Figma", category: "Tools" },
-    { name: "Postman", category: "Tools" },
-    { name: "Beekeeper", category: "Tools" },
+    { name: "Git", category: "Tools", icon: "git", featured: true },
+    { name: "VS Code", category: "Tools", icon: "vscode" },
+    { name: "Figma", category: "Tools", icon: "figma" },
+    { name: "Postman", category: "Tools", icon: "postman" },
+    { name: "Beekeeper", category: "Tools", icon: "beekeeperstudio" },
   ],
 
   projects: [
@@ -410,12 +410,12 @@ export const portfolio: Portfolio = {
     // [SAMPLE] — replace with your real experience
     {
       id: "work-2025",
-      role: "Full-Stack & AI Developer",
+      role: "Programming Specialist & Full-Stack Developer",
       organization: "Lightem Solutions",
       location: "Philippines",
       start: "July 2023",
       end: null,
-      description: "Building web applications and AI-powered tools.",
+      description: "Building web applications, desktop systems, and automation tools.",
       highlights: [
         "Delivered full-stack apps from design to deployment",
         "Modernized legacy VB.NET systems with web dashboards",

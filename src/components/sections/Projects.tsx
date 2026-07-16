@@ -130,7 +130,7 @@ const Projects = () => {
         {filtered.length} project{filtered.length === 1 ? '' : 's'} found
       </p>
 
-      <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <AnimatePresence mode="popLayout">
           {filtered.map((project) => (
             <ProjectCard key={project.slug} project={project} />

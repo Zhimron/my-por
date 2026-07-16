@@ -14,6 +14,7 @@ import { portfolio, skillCategories } from '../../data/portfolio';
 import type { SkillCategory } from '../../data/types';
 import { staggerContainer } from '../../lib/motion';
 import SectionHeading from '../ui/SectionHeading';
+import SkillIcon from '../ui/SkillIcon';
 
 /**
  * Each category gets its own tetromino color so the grid below reads like
@@ -148,8 +149,9 @@ const Skills = () => {
                 {skills.map((skill) => (
                   <li
                     key={skill.name}
-                    className={`rounded-md border border-slate-200 bg-white/70 px-3 py-1.5 text-sm font-medium text-slate-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] transition-all duration-200 hover:-translate-y-0.5 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] ${style.chipHover}`}
+                    className={`inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white/70 px-3 py-1.5 text-sm font-medium text-slate-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] transition-all duration-200 hover:-translate-y-0.5 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] ${style.chipHover}`}
                   >
+                    <SkillIcon icon={skill.icon} className="h-4 w-4 shrink-0" />
                     {skill.name}
                   </li>
                 ))}

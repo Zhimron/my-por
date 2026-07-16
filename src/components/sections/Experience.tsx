@@ -30,7 +30,7 @@ const Experience = () => {
       <SectionHeading
         eyebrow="My journey"
         title="Experience"
-        subtitle="Work and education, one commit at a time — from desktop systems to AI engineering."
+        subtitle="Work and education, one commit at a time — from desktop systems to full-stack development."
       />
 
       <div className="glass-card overflow-hidden">

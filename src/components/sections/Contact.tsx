@@ -124,7 +124,7 @@ const Contact = () => {
 
             <a
               href={personal.resumeUrl}
-              download
+              download="Shimron-Guray-Resume.pdf"
               className="mt-5 inline-flex items-center gap-2 font-mono text-xs font-semibold text-indigo-600 transition-colors hover:text-indigo-500 dark:text-indigo-300"
             >
               <Download size={13} aria-hidden="true" />$ curl -O resume.pdf
