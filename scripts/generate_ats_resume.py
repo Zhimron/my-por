@@ -73,20 +73,21 @@ EXPERIENCE = [
 
 PROJECTS = [
     {
-        "name": "Hand Gesture Recognition System | 2026",
+        "name": "Lightem Business Management Platform | Full-Stack Developer | 2024 - Present",
         "bullets": [
-            "Built a real-time desktop application for hand tracking, custom gesture recognition, mouse control, and keyboard automation.",
-            "Separated webcam capture, AI inference, and rendering into a multithreaded pipeline for responsive interaction.",
+            "Frontend: Build responsive React interfaces and integrate tenant-aware workflows across accounting, inventory, POS, HRIS, payroll, sales, ticketing, and reporting modules.",
+            "Backend: Develop and maintain authenticated PHP JSON APIs, JWT access and refresh flows, business logic, validation, and MySQL data access through PDO.",
+            "Connect frontend forms and server-state workflows to backend controllers and gateways while preserving reliable request and response contracts.",
         ],
-        "tech": "Python, MediaPipe, OpenCV, PySide6, NumPy, JSON, Computer Vision",
+        "tech": "React, Vite, JavaScript, Tailwind CSS, Material UI, React Query, Zustand, PHP 8.2, MySQL, PDO, REST APIs, JWT",
     },
     {
-        "name": "Python File Locker | 2026",
+        "name": "Enrollment and Admission System | Backend Developer | 2023",
         "bullets": [
-            "Developed a desktop security application for encrypting files, folders, images, videos, and documents.",
-            "Implemented authenticated encryption, Argon2id password derivation, encrypted metadata, compression, and optional key-file protection.",
+            "Developed server-side logic and REST APIs supporting student registration, enrollment, admission, and record-processing workflows.",
+            "Integrated PHP and MySQL services with React and Tailwind CSS interfaces in collaboration with frontend developers.",
         ],
-        "tech": "Python, PySide6, AES-256-GCM, ChaCha20-Poly1305, Argon2id, PyInstaller",
+        "tech": "PHP, MySQL, React, Tailwind CSS, REST APIs, Postman",
     },
     {
         "name": "Laundry Management System | Lead Programmer",

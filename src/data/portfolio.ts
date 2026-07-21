@@ -18,6 +18,7 @@ import imgTravelLog from "../assets/projects/image4.png";
 import imgEnrollment from "../assets/projects/enrollment-admission.svg";
 import imgCooperative from "../assets/projects/cooperative-system.svg";
 import imgAccounting from "../assets/projects/accounting-system.svg";
+import imgLightem from "../assets/projects/lightem-business-platform.svg";
 import imgHandGestureRecognition from "../assets/projects/Screenshot 2026-07-15 094741.png";
 
 
@@ -108,6 +109,57 @@ export const portfolio: Portfolio = {
 
   projects: [
     // [SAMPLE] — replace with your real projects
+    {
+      slug: "lightem-business-platform",
+      title: "Lightem Business Management Platform",
+      description:
+        "Multi-tenant full-stack business platform covering accounting, inventory, POS, HRIS, payroll, sales, ticketing, and reporting.",
+      longDescription:
+        "Lightem is a full-stack business management platform that I began working on in 2024. I contribute across its React frontend and PHP backend, developing responsive module interfaces, connecting tenant-aware API workflows, maintaining authenticated JSON endpoints, and supporting the MySQL data layer. The platform brings accounting, inventory, point-of-sale, HRIS, payroll, sales, support ticketing, and reporting workflows into one secure application.",
+      image: imgLightem,
+      tech: [
+        "React",
+        "Vite",
+        "JavaScript",
+        "Tailwind CSS",
+        "Material UI",
+        "TanStack React Query",
+        "Zustand",
+        "React Hook Form",
+        "Zod",
+        "PHP 8.2",
+        "MySQL",
+        "PDO",
+        "REST API",
+        "JWT",
+      ],
+      features: [
+        "Multi-tenant company login and tenant-specific API routing",
+        "JWT access and refresh token authentication",
+        "Role-based access to protected application modules",
+        "Accounting, inventory, POS, HRIS, and payroll workflows",
+        "Sales, support ticketing, and business reporting modules",
+        "Responsive React interfaces with reusable query and form patterns",
+        "PHP JSON APIs organized around controllers and database gateways",
+        "Parameterized MySQL queries through PDO",
+        "Frontend and backend validation across business workflows",
+        "Scheduled jobs and optional third-party service integrations",
+      ],
+      status: "in-progress",
+      category: "fullstack",
+      tags: [
+        "Enterprise Software",
+        "Business Management",
+        "Multi-Tenant",
+        "Accounting",
+        "Inventory",
+        "HRIS",
+        "PHP",
+        "React",
+      ],
+      featured: true,
+      year: 2024,
+    },
     {
       slug: "LaundryM",
       title: "Laundry Management System",
